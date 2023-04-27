@@ -14,9 +14,9 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class Pret {
-    @Idf
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "code_adherent")
