@@ -19,11 +19,8 @@ public class Location {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
     private Client client;
-
     @ManyToOne
-    @JoinColumn(name = "document_id")
     private Document document;
 
     private Date dateLocation;

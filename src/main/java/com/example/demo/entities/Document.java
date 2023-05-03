@@ -1,11 +1,13 @@
 package com.example.demo.entities;
 
+import com.example.demo.models.Bibliotheque;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -27,10 +29,15 @@ public class Document  {
     private float prixLocation;
     @ManyToOne
     private Client client;
-    @ManyToOne
-    private Adherent adherent;
-    @ManyToOne
-    private Bibliotheque bibliotheque;
+    @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
+    private Collection<Pret> pretCollection;
+    @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
+    private Collection<Location> locationCollection;
+    @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
+    private Collection<Reservation> reservationCollection;
+
+    //@OneToMany
+    //private Bibliotheque bibliotheque;
 
 
 }

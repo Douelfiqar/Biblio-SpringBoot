@@ -17,14 +17,10 @@ public class Pret {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private Date datePret;
     @ManyToOne
-    @JoinColumn(name = "code_adherent")
     private Adherent adherent;
-
     @ManyToOne
-    @JoinColumn(name = "document_id")
     private Document document;
 
-    private Date datePret;
 }
