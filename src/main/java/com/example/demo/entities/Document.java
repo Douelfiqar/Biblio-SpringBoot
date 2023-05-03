@@ -27,8 +27,7 @@ public class Document  {
     private int nombreExemplaire;
     private Date dateEdition;
     private float prixLocation;
-    @ManyToOne
-    private Client client;
+
     @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
     private Collection<Pret> pretCollection;
     @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
