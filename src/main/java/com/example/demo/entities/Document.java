@@ -1,6 +1,6 @@
 package com.example.demo.entities;
 
-import com.example.demo.models.Bibliotheque;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,15 +28,24 @@ public class Document  {
     private Date dateEdition;
     private float prixLocation;
 
+    private String linkImage;
+    private String shortDesc;
+
+
     @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Pret> pretCollection;
     @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Location> locationCollection;
     @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Reservation> reservationCollection;
 
-    //@OneToMany
-    //private Bibliotheque bibliotheque;
+
+    @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Bibliotheque bibliotheque;
 
 
 }

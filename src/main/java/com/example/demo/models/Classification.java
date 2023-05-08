@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Classification {
-        private ArrayList<String> sujets ;
+    private ArrayList<String> sujets ;
     private ArrayList<String> auteurs ;
     private ArrayList<String> titres ;
     private ArrayList<String> categories ;
