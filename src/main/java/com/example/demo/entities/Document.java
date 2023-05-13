@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,6 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Document  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,8 @@ public class Document  {
     private String auteur;
     private String categorie;
     private int nombreExemplaire;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+
     private Date dateEdition;
     private float prixLocation;
 

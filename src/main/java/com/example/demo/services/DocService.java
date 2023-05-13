@@ -19,7 +19,7 @@ public class DocService {
         return documentRepo.save(doc);
     }
 
-    public Collection<Document> findAll(){
+    public Collection<Document> findAllDocs(){
         return documentRepo.findAll();
     }
 
@@ -33,5 +33,9 @@ public class DocService {
 
     public void deleteDocById(Long id){
         documentRepo.deleteDocumentById(id);
+    }
+
+    public Collection<Document> SearchDocument(String term){
+        return documentRepo.SearchDocument(term);
     }
 }
