@@ -42,29 +42,52 @@ public class BiblioController {
         docService.deleteDocById(id);
     }
 
-        @CrossOrigin(origins = "http://localhost:4200")
-        @PostMapping("/addProduct")
-        public void addDocs(@RequestBody Document document){
-        Bibliotheque bibliotheque = biblioService.getBiblio();
-        Document document1 = new Document();
-        document1.setAuteur(document.getAuteur());
-        document1.setSujet(document.getSujet());
-        document1.setTitre(document.getTitre());
-        document1.setLinkImage(document.getLinkImage());
-        document1.setCategorie(document.getCategorie());
-        document1.setShortDesc(document.getShortDesc());
-        document1.setPrixLocation(document.getPrixLocation());
-        document1.setNombreExemplaire(document.getNombreExemplaire());
-        document1.setDateEdition(document.getDateEdition());
-        document1.setBibliotheque(bibliotheque);
-        docService.saveDoc(document1);
-            System.out.printf("done");
-        }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/addProduct")
+    public void addDocs(@RequestBody Document document){
+    Bibliotheque bibliotheque = biblioService.getBiblio();
+    Document document1 = new Document();
+    document1.setAuteur(document.getAuteur());
+    document1.setSujet(document.getSujet());
+    document1.setTitre(document.getTitre());
+    document1.setLinkImage(document.getLinkImage());
+    document1.setCategorie(document.getCategorie());
+    document1.setShortDesc(document.getShortDesc());
+    document1.setPrixLocation(document.getPrixLocation());
+    document1.setNombreExemplaire(document.getNombreExemplaire());
+    document1.setDateEdition(document.getDateEdition());
+    document1.setBibliotheque(bibliotheque);
+    docService.saveDoc(document1);
+
+    }
 
     @CrossOrigin("http://localhost:4200")
     @GetMapping("/Search")
     public Collection<Document> SearchDocument(@RequestParam("term") String term){
         return docService.SearchDocument(term);
     }
+    @CrossOrigin("http://localhost:4200")
+    @PostMapping("/updateProduct/")
+    public void updateDocs(@RequestBody Document document){
+        System.out.println(document);
+        Document document1 = docService.getDocsById(document.getId());
+
+        document1.setAuteur(document.getAuteur());
+        document1.setSujet(document.getSujet());
+        document1.setTitre(document.getTitre());
+        document1.setCategorie(document.getCategorie());
+        document1.setNombreExemplaire(document.getNombreExemplaire());
+        document1.setShortDesc(document.getShortDesc());
+        document1.setPrixLocation(document.getPrixLocation());
+        document1.setLinkImage(document.getLinkImage());
+        document1.setDateEdition(document.getDateEdition());
+
+        Bibliotheque bibliotheque = biblioService.getBiblio();
+
+        document1.setBibliotheque(bibliotheque);
+        docService.saveDoc(document1);
+    }
+
+
 
 }
