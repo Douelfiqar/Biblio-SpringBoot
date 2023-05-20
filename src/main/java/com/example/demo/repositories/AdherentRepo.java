@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdherentRepo extends JpaRepository<Adherent, Long> {
+    public Adherent findAdherentByCodeAdherent(String codeAdherent);
 }

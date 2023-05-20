@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(unique = true)
     private String CIN;
     private String nom;
     private String prenom;
@@ -22,10 +23,10 @@ public class Client {
     private String address;
     private String numTelephone;
     private int nmbreAllocationEnCours;
-
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Location> locationCollection;
-
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Reservation> reservationCollection;
 }

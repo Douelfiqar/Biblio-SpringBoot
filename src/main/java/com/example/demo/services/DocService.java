@@ -38,4 +38,8 @@ public class DocService {
     public Collection<Document> SearchDocument(String term){
         return documentRepo.SearchDocument(term);
     }
+
+    public int NmbrePretDocument(String categorie){
+        return documentRepo.NmbrePretDocument(categorie);
+    }
 }

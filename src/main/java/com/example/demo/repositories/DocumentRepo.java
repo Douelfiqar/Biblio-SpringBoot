@@ -18,4 +18,7 @@ public interface DocumentRepo extends JpaRepository<Document, Long> {
     public Collection<Document> findAllDocs();
     @Query("SELECT d FROM Document d WHERE d.titre LIKE CONCAT('%', :term, '%')")
     public Collection<Document> SearchDocument(String term);
+
+    @Query("select count(*) from Pret where document.id IN (select id from Document where categorie = :categorie)")
+    public int NmbrePretDocument(String categorie);
 }

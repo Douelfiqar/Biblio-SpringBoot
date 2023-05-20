@@ -1,9 +1,11 @@
 package com.example.demo.controllers;
 
+import com.example.demo.entities.Adherent;
 import com.example.demo.entities.Bibliotheque;
+import com.example.demo.entities.Client;
 import com.example.demo.entities.Document;
-import com.example.demo.services.BiblioService;
-import com.example.demo.services.DocService;
+import com.example.demo.repositories.ReservationRepo;
+import com.example.demo.services.*;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,11 @@ import java.util.Date;
 public class BiblioController {
     private DocService docService;
     private BiblioService biblioService;
+    private LocationService locationService;
+    private ClientService clientService;
+    private PreterService preterService;
+    private AdherentService adherentService;
+    private ReservationService reservationService;
     @CrossOrigin("http://localhost:4200")
     @GetMapping("/")
     public Collection<Document> getDocs(){
@@ -69,7 +76,7 @@ public class BiblioController {
     @CrossOrigin("http://localhost:4200")
     @PostMapping("/updateProduct/")
     public void updateDocs(@RequestBody Document document){
-        System.out.println(document);
+
         Document document1 = docService.getDocsById(document.getId());
 
         document1.setAuteur(document.getAuteur());
@@ -88,6 +95,45 @@ public class BiblioController {
         docService.saveDoc(document1);
     }
 
+    @GetMapping("/addLocation")
+    public void addLocation(@RequestParam("idDocument") String idDocument, @RequestParam("cinClient") String cinClient){
+        locationService.addLocation(Long.parseLong(idDocument), cinClient);
+    }
+
+    @GetMapping("/getClients")
+    public Collection<Client> getAllClients(){
+        return clientService.getAllClients();
+    }
+
+    @GetMapping("/getAdherents")
+    public Collection<Adherent> getAdherents(){
+        return adherentService.getAllAdherent();
+    }
+
+    @GetMapping("/addPret")
+    public void addPret(@RequestParam("idDocument") String idDocument, @RequestParam("codeAdherent") String codeAdherent){
+        preterService.addPretation(Long.parseLong(idDocument), codeAdherent);
+    }
+
+    @GetMapping("/NombreDoc")
+    public int NmbrePretDocument(@RequestParam("categorie") String categorie){
+        int nombrePret = docService.NmbrePretDocument(categorie);
+        return nombrePret;
+    }
+
+    @GetMapping("/addReservation")
+    public void addReservation(@RequestParam("idDocument") String idDocument, @RequestParam("cinClient") String cinClient){
+        reservationService.addReservation(Long.parseLong(idDocument), cinClient);
+    }
+
+    @PostMapping("/addUser")
+    public void addClient(@RequestBody Client client){
+        clientService.addClient(client);
+    }
+    @PostMapping("/addAdherent")
+    public void addClient(@RequestBody Adherent adherent){
+        adherentService.addAdherent(adherent);
+    }
 
 
 }

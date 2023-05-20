@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +24,9 @@ public class Location {
     @ManyToOne
     private Document document;
 
-    private Date dateLocation;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date dateDebutLocation;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date dateFinLocation;
 }
 

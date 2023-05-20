@@ -26,7 +26,6 @@ public class Document  {
     private String categorie;
     private int nombreExemplaire;
     @JsonFormat(pattern = "dd-MM-yyyy")
-
     private Date dateEdition;
     private float prixLocation;
 
@@ -37,6 +36,7 @@ public class Document  {
     @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Pret> pretCollection;
+
     @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Location> locationCollection;
