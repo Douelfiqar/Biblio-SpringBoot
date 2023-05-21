@@ -24,32 +24,27 @@ public class BiblioController {
     private PreterService preterService;
     private AdherentService adherentService;
     private ReservationService reservationService;
-    @CrossOrigin("http://localhost:4200")
     @GetMapping("/")
     public Collection<Document> getDocs(){
 
         return docService.findAllDocs();
     }
 
-    @CrossOrigin("http://localhost:4200")
     @GetMapping("/categories/{categ}/")
     public Collection<Document> getDocs(@PathVariable String categ){
         return docService.getDocsByCategorie(categ);
     }
 
-    @CrossOrigin("http://localhost:4200")
     @GetMapping("/book/{id}/")
     public Document getDocsById(@PathVariable Long id){
         return docService.getDocsById(id);
     }
 
-    @CrossOrigin("http://localhost:4200")
     @DeleteMapping("/delete/{id}/")
     public void deleteDocById(@PathVariable Long id){
         docService.deleteDocById(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/addProduct")
     public void addDocs(@RequestBody Document document){
     Bibliotheque bibliotheque = biblioService.getBiblio();
@@ -68,12 +63,10 @@ public class BiblioController {
 
     }
 
-    @CrossOrigin("http://localhost:4200")
     @GetMapping("/Search")
     public Collection<Document> SearchDocument(@RequestParam("term") String term){
         return docService.SearchDocument(term);
     }
-    @CrossOrigin("http://localhost:4200")
     @PostMapping("/updateProduct/")
     public void updateDocs(@RequestBody Document document){
 
@@ -126,14 +119,25 @@ public class BiblioController {
         reservationService.addReservation(Long.parseLong(idDocument), cinClient);
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/addUser/")
     public void addClient(@RequestBody Client client){
         clientService.addClient(client);
     }
-    @PostMapping("/addAdherent")
+    @PostMapping("/addAdherent/")
     public void addClient(@RequestBody Adherent adherent){
         adherentService.addAdherent(adherent);
     }
+
+    @DeleteMapping("/deleteClient")
+    public void deleteClientById(@RequestParam("id") String id){
+        clientService.deleteClientById(Long.parseLong(id));
+    }
+
+    @GetMapping("/searchClients")
+    public Collection<Client> SearchClient(@RequestParam("term") String term){
+        return clientService.SearchClient(term);
+    }
+
 
 
 }
