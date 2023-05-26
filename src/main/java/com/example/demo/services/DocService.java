@@ -1,13 +1,16 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.Document;
+import com.example.demo.entities.Pret;
 import com.example.demo.repositories.DocumentRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.print.Doc;
 import java.util.Collection;
+import java.util.Date;
 
 @Service
 @AllArgsConstructor
@@ -41,5 +44,12 @@ public class DocService {
 
     public int NmbrePretDocument(String categorie){
         return documentRepo.NmbrePretDocument(categorie);
+    }
+
+    public int rapport(Date depart, Date fin, Long idDoc){
+        return documentRepo.raport(depart, fin, idDoc);
+    }
+    public int raportLocation(Date depart, Date fin, Long idDoc){
+        return documentRepo.raportLocation(depart, fin, idDoc);
     }
 }

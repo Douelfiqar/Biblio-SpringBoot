@@ -12,4 +12,6 @@ public interface ClientRepo extends JpaRepository<Client, Long> {
     public Client getClientByCIN(String cin);
     @Query("SELECT c FROM Client c WHERE c.CIN LIKE CONCAT('%', :term, '%')")
     public Collection<Client> getClientLikeCin(String term);
+
+    public Client findClientById(Long id);
 }

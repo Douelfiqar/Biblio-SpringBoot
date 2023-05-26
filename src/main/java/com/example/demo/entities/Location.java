@@ -28,5 +28,7 @@ public class Location {
     private Date dateDebutLocation;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dateFinLocation;
+    @Column(name = "rendu", columnDefinition = "boolean default false")
+    private boolean rendu;
 }
 

@@ -23,6 +23,12 @@ public class Client {
     private String address;
     private String numTelephone;
     private int nmbreAllocationEnCours;
+    @Column(name = "isAdherent", columnDefinition = "boolean default false")
+    private boolean isAdherent;
+    public boolean getIsAdherent(){
+        return isAdherent;
+    }
+
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Location> locationCollection;

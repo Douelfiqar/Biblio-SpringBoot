@@ -1,17 +1,17 @@
 package com.example.demo.controllers;
 
-import com.example.demo.entities.Adherent;
-import com.example.demo.entities.Bibliotheque;
-import com.example.demo.entities.Client;
-import com.example.demo.entities.Document;
+import com.example.demo.entities.*;
 import com.example.demo.repositories.ReservationRepo;
 import com.example.demo.services.*;
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.Doc;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/Biblio")
@@ -137,7 +137,41 @@ public class BiblioController {
     public Collection<Client> SearchClient(@RequestParam("term") String term){
         return clientService.SearchClient(term);
     }
+    @GetMapping("/NmbrePret")
+    public int rapport(@RequestParam("depart") @DateTimeFormat(pattern = "yyyy-MM-dd")  Date depart,
+                                    @RequestParam("fin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fin, @RequestParam("idDoc") Long idDoc) {
+        return docService.rapport(depart, fin, idDoc);
+    }
 
+    @GetMapping("/NmbreLocation")
+    public int rapportLocation(@RequestParam("depart") @DateTimeFormat(pattern = "yyyy-MM-dd")  Date depart,
+                                        @RequestParam("fin") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fin, @RequestParam("idDoc") Long idDoc) {
+        return docService.raportLocation(depart, fin, idDoc);
+    }
 
+    @GetMapping("/ListPret")
+    public Collection<Document> selectionDocsPreter(@RequestParam("idAdherent") Long idAdherent){
+        return preterService.selectionDocsPreter(idAdherent);
+    }
+
+    @GetMapping("/ListLocation")
+    public Collection<Document> selectionDocsLouer(@RequestParam("idClient") Long idClient){
+        return locationService.selectionDocsLouer(idClient);
+    }
+    @GetMapping("/isAdherent")
+    public boolean isAdherentById(@RequestParam("idAdherent")Long id) {
+        Optional<Adherent> adherentOptional = adherentService.getAdherentById(id);
+        return adherentOptional.isPresent();
+    }
+
+    @GetMapping("/renduLocation")
+    public void renduLocation(@RequestParam("idDocument")Long idDocument,@RequestParam("idClient") Long idClient) {
+        locationService.renduLocation(idDocument, idClient);
+    }
+
+    @GetMapping("/renduPret")
+    public void renduPret(@RequestParam("idDocument")Long idDocument, @RequestParam("idAdherent")Long idAdherent) {
+        preterService.renduPret(idDocument, idAdherent);
+    }
 
 }

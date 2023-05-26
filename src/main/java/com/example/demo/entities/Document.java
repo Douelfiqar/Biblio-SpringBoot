@@ -31,7 +31,8 @@ public class Document  {
 
     private String linkImage;
     private String shortDesc;
-
+    @Column(name = "perdu", columnDefinition = "boolean default false")
+    private boolean perdu;
 
     @OneToMany(mappedBy = "document", fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

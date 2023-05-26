@@ -26,5 +26,7 @@ public class Pret {
     private Adherent adherent;
     @ManyToOne
     private Document document;
+    @Column(name = "rendu", columnDefinition = "boolean default false")
+    private boolean rendu;
 
 }
