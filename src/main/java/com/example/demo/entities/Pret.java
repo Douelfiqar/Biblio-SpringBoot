@@ -28,5 +28,7 @@ public class Pret {
     private Document document;
     @Column(name = "rendu", columnDefinition = "boolean default false")
     private boolean rendu;
+    @Column(name = "amende", columnDefinition = "int default 0")
 
+    private double amende;
 }

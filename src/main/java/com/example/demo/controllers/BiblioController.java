@@ -171,7 +171,25 @@ public class BiblioController {
 
     @GetMapping("/renduPret")
     public void renduPret(@RequestParam("idDocument")Long idDocument, @RequestParam("idAdherent")Long idAdherent) {
+        Adherent adherent = adherentService.getAdherentById(idAdherent).get();
+        int nbmrAllocation = adherent.getNmbreAllocationEnCours() - 1;
+        adherentService.addAdherent(adherent);
         preterService.renduPret(idDocument, idAdherent);
+    }
+
+    @GetMapping("/ListReservation")
+    public Collection<Reservation> listReservation(@RequestParam("idBook") Long idBook){
+        return reservationService.listReservation(idBook);
+    }
+
+    @GetMapping("/amendeLocation")
+    public double getAmendeLocation(@RequestParam("idDocument") Long idDocument, @RequestParam("idClient") Long idClient){
+            return locationService.getAmende(idDocument, idClient);
+    }
+
+    @GetMapping("/amendePret")
+    public double getAmendePret(@RequestParam("idDocument") Long idDocument, @RequestParam("idClient") Long idClient){
+        return preterService.getAmende(idDocument, idClient);
     }
 
 }
